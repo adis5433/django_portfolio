@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+       <tr>
+           <th>Nick</th>
+           <td>{{ author.nick }}</td>
+       </tr>
+       <tr>
+           <th>E-mail</th>
+           <td>{{ author.email }}</td>
+       </tr>
+   </table>
+    <a href="{% url "posts:author_list" %}">Powrót do listy komentujących</a>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+         <h2>Użytkownicy którzy napisali posty:</h2>
+    <ul>
+       {% for a in authors %}
+            <li><a href="{% url "posts:author" a.id %}">{{ a.nick }}</a></li>
+       {% endfor %}
+   </ul>
+            <h3>Nowy autor</h3>
+        <form method="post">
+               {% csrf_token %}
+               {{ form.as_table }}
+            <input type="submit" value="go">
+        </form>
+</body>
+</html>

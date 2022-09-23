@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    {% block title %}{{ title }}{% endblock %}
+<body>
+<table>
+       <tr>
+           <th>Title</th>
+           <td>{{ post.title }}</td>
+       </tr>
+       <tr>
+           <th>Content</th>
+           <td>{{ post.content }}</td>
+       </tr>
+       <tr>
+           <th>date of creat:</th>
+           <td>{{ post.created }}</td>
+       </tr>
+       <tr>
+           <th>fast modifiy</th>
+           <td>{{ post.modified}}</td>
+       </tr>
+       <tr>
+           <th>Author of post</th>
+           <td>{{ author.nick }}</td>
+       </tr>
+   </table>
+    <a href="{% url "posts:post_list" %}">Powrót do listy komentarzy</a>
+</body>
+</html>
