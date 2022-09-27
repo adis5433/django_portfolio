@@ -1,0 +1,123 @@
+[
+{
+    "model": "posts.post",
+    "pk": 1,
+    "fields": {
+        "title": "Pierwszy",
+        "content": "to jest pierwszy post",
+        "created": "2022-09-20T15:49:21.704Z",
+        "modified": "2022-09-22T07:52:56.742Z",
+        "author": 1
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 2,
+    "fields": {
+        "title": "test",
+        "content": "testowy post",
+        "created": "2022-09-20T15:49:41.880Z",
+        "modified": "2022-09-22T07:53:00.522Z",
+        "author": 1
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 3,
+    "fields": {
+        "title": "tytu 3",
+        "content": "trzeci wpis",
+        "created": "2022-09-20T15:50:14.389Z",
+        "modified": "2022-09-22T07:53:05.028Z",
+        "author": 1
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 4,
+    "fields": {
+        "title": "nowy_wpis",
+        "content": "nowy wpis dodany przez panel admina",
+        "created": "2022-09-22T08:25:32.249Z",
+        "modified": "2022-09-22T08:25:32.249Z",
+        "author": 2
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 5,
+    "fields": {
+        "title": "sad",
+        "content": "to jest post dodany przez formularz",
+        "created": "2022-09-23T08:58:59.788Z",
+        "modified": "2022-09-23T08:58:59.788Z",
+        "author": 1
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 6,
+    "fields": {
+        "title": "testtest",
+        "content": "testowy jeszcze raz",
+        "created": "2022-09-23T08:59:28.216Z",
+        "modified": "2022-09-23T08:59:28.216Z",
+        "author": 3
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 7,
+    "fields": {
+        "title": "testtesttest",
+        "content": "formularz testowy",
+        "created": "2022-09-23T09:00:01.550Z",
+        "modified": "2022-09-23T09:00:01.550Z",
+        "author": 2
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 8,
+    "fields": {
+        "title": "test",
+        "content": "test",
+        "created": "2022-09-23T15:47:52.595Z",
+        "modified": "2022-09-23T15:47:52.595Z",
+        "author": 1
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 9,
+    "fields": {
+        "title": "Client test",
+        "content": "raz,dwa,trzy",
+        "created": "2022-09-24T10:03:38.135Z",
+        "modified": "2022-09-24T10:03:38.135Z",
+        "author": null
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 10,
+    "fields": {
+        "title": "Client test",
+        "content": "raz,dwa,trzy",
+        "created": "2022-09-24T10:04:13.390Z",
+        "modified": "2022-09-24T10:04:13.390Z",
+        "author": null
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 11,
+    "fields": {
+        "title": "zapisane przez fixtures",
+        "content": "zapisałem to przez plik json",
+        "created": "2022-09-25T10:04:13.390Z",
+        "modified": "2022-09-25T10:04:13.390Z",
+        "author": null
+    }
+}
+]

@@ -1,0 +1,11 @@
+{
+    "model": "posts.post",
+    "pk": 1,
+    "fields": {
+        "title": "Pierwszy",
+        "content": "to jest pierwszy post",
+        "created": "2022-09-20T15:49:21.704Z",
+        "modified": "2022-09-22T07:52:56.742Z",
+        "author": 1
+    }
+}

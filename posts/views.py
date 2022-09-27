@@ -7,13 +7,13 @@ from posts.forms import PostForm, AuthorForm
 def posts_list(request):
     if request.method == "POST":
         form = PostForm(data=request.POST)
-
         if  form.is_valid():
-            author = Author.objects.get(pk=int(form.cleaned_data['author']))
-            data = form.cleaned_data.copy()
-            data['author'] = author
-            print(data)
-            Post.objects.create(**data)
+            form.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                "Dodano nowy Post!!"
+            )
         else:
             messages.add_message(
                 request,
@@ -54,7 +54,12 @@ def authors_list(request):
         print(form.data)
 
         if form.is_valid():
-            Author.objects.create(**form.cleaned_data)
+            form.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                "Dodano nowy Post!!"
+                )
 
     authors = Author.objects.all()
     form = AuthorForm()

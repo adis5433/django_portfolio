@@ -1,23 +1,24 @@
 from django import forms
 from posts.models import Post, Author
 
-class PostForm(forms.Form):
-    title = forms.CharField(max_length=20)
-    content = forms.CharField(max_length=1000,widget=forms.Textarea)
-    author = forms.ChoiceField(choices=((a.id, a.nick) for a in Author.objects.all()))
-
+class PostForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
         title  = cleaned_data.get('title')
         content = cleaned_data.get('content')
+        author = clened_data.get('author')
 
-        if not (title or content):
+        if not title or content:
             raise forms.ValidationError("Należy podać wszystkie wartości")
 
-class AuthorForm(forms.Form):
-    nick = forms.CharField(max_length=10)
-    email = forms.EmailField(max_length=40)
+    class Meta:
+        model = Post
+        fields = ["title", "content", "author"]
+
+
+
+class AuthorForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
@@ -27,3 +28,7 @@ class AuthorForm(forms.Form):
 
         if not (nick or email):
             raise forms.ValidationError("Należy podać wszystkie wartości")
+
+    class Meta:
+        model = Author
+        fields = ["nick", "email"]
