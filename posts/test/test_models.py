@@ -1,7 +1,6 @@
 
 from django.test import TestCase,Client
 from posts.models import Post, Author
-from posts.forms import PostForm
 # Create your tests here.
 
 
@@ -22,8 +21,9 @@ class PostModelTest(TestCase):
         self.assertEqual(p2.content, "testing_post_model_2")
 
 class AuthorModelTest(TestCase):
+
     def setUp(self):
-        Post.objects.create(nick="modelowy_test", email="model@testowy.pl")
+        Author.objects.create(nick="modelowy_test", email="model@testowy.pl")
 
     def test_authors_str(self):
 

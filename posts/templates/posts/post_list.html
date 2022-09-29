@@ -1,25 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-        <h2>Posty użytkowników</h2>
-    <ul>
-       {% for p in posts %}
-        <li><a href="{% url "posts:post" p.id %}">{{ p.title }}</a></li>
-       {% endfor %}
-   </ul>
-        <h3>nowy post</h3>
-        <form method="post">
-            {% csrf_token %}
-            {% for field_form in form %}
-            <p>{{field_form.name|capfirst}}:</p>
-            <p>{{ field_form }}</p>
-            {% endfor %}
-            <input type="submit" value="go">
-        </form>
+{% extends "G:\Python\Kodilla\workspace\portfolio\infos\templates\main.html" %}
 
-</body>
-</html>
+
+    {% block title %}{{ title }}{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="sub-header">
+    <div class="searcher">
+        <form method = "GET">
+            <h2>Wyszukiwarka postów po tytule:</h2>
+            {{search_form.searched_title}}
+            <input type="submit" value="Szukaj">
+        </form>
+    </div>
+</div>
+        <div class="row">
+            <div class="col-6">
+                <table class="table">
+                    <thead>
+                    <th scope="col">Posty użytkowników</th>
+                    </thead>
+                <tbody>
+                <ul>
+
+                   {% for p in posts %}
+                    <tr>
+                        <td><a href="{{ p.id }}/">{{ p.title }}</a></td>
+                    </tr>
+                   {% endfor %}
+
+                </ul>
+                </tbody>
+                </table>
+
+        <div class="pagination text-center" aria-label="Page navigation example">
+           <span class="step-links ">
+               <ul class="pagination">
+               {% if posts.has_previous %}
+
+               <li class="page-item">
+               <a class="page-link" href="?page={{ posts.previous_page_number }}">previous</a>
+               </li>
+               {% endif %}
+                {% for pag in paginator.page_range %}
+                   <li class="page-item">
+                    <a class="page-link" href="?page={{pag}}">{{pag}} </a>
+                </li>
+                   {%endfor%}
+               {% if posts.has_next %}
+               <li class="page-item">
+                   <a class="page-link" href="?page={{ posts.next_page_number }}">next</a>
+               </li>
+
+               {% endif %}
+           </ul>
+               <div>Page {{ posts.number }} of {{ posts.paginator.num_pages }}.</div>
+           </span>
+       </div>
+     </div>
+
+            <div class="col-6">
+                <div class="new_post_form" >
+                        <h3>Nowy post</h3>
+                        <form method="post">
+                            {% csrf_token %}
+                            {% for field_form in form %}
+                            <p>{{field_form.name|capfirst}}:</p>
+                            <p>{{ field_form.content }}</p>
+                            <p>{{ field_form }}</p>
+                            {% endfor %}
+                            <input type="submit" value="Zapisz">
+                        </form>
+
+                </div>
+    </div>
+</div>
+
+
+{% endblock %}

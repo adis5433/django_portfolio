@@ -1,0 +1,21 @@
+{% extends "posts/main.html" %}
+    {% block title %}{{ title }}{% endblock %}
+{% block content %}
+<body>
+<div class="searcher">
+        <form method = "GET">
+            <h2>Wyszukiwarka postów po tytule:</h2>
+            {{search_form.searched_title}}
+            <input type="submit" value="Szukaj">
+        </form>
+    </div>
+    <div class="post_list">
+        <h2>Wyniki wyszukiwania postów o tytule - "<i>{{ searched_title }}</i>"</h2>
+        <ul>
+           {% for p in posts %}
+            <li><a href="{% url "posts:post" p.id %}">{{ p.title }}</a></li>
+           {% endfor %}
+       </ul>
+    </div>
+</body>
+{% endblock %}

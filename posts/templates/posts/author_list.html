@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "G:\Python\Kodilla\workspace\portfolio\infos\templates\main.html" %}
+    {% block title %}{{ title }}{% endblock %}
+{% block content %}
+
+<div class="sub-header">
+</div>
          <h2>Użytkownicy którzy napisali posty:</h2>
     <ul>
        {% for a in authors %}
-            <li><a href="{% url "posts:author" a.id %}">{{ a.nick }}</a></li>
+            <li><a href="{{ a.id }}/">{{ a.nick }}</a></li>
        {% endfor %}
    </ul>
             <h3>Nowy autor</h3>
@@ -17,5 +16,5 @@
                {{ form.as_table }}
             <input type="submit" value="go">
         </form>
-</body>
-</html>
+
+{% endblock %}

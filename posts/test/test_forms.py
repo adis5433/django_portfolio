@@ -5,7 +5,7 @@ from posts.forms import PostForm, AuthorForm
 # Create your tests here.
 
 
-class PostsFormTest(forms.ModelForm):
+class PostsFormTest(TestCase):
 
     def test_post_save_correct_data(self):
         data = {"value": 200}
@@ -18,7 +18,7 @@ class PostsFormTest(forms.ModelForm):
         self.assertIsNotNone(p.id)
         self.assertIsNone(p.error)
 
-class PostsFormTest(forms.ModelForm):
+class PostsFormTest(TestCase):
 
     def test_post_save_correct_data(self):
         data = {"value": 200}
@@ -32,7 +32,7 @@ class PostsFormTest(forms.ModelForm):
         self.assertIsNone(p.error)
 
 
-class AuthorsFormTest(forms.ModelForm):
+class AuthorsFormTest(TestCase):
 
     def test_author_save_correct_data(self):
         data = {"value": 200}

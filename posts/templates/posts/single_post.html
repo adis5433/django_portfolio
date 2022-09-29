@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+{% extends "G:\Python\Kodilla\workspace\portfolio\infos\templates\main.html" %}
     {% block title %}{{ title }}{% endblock %}
-<body>
+{% block content %}
+
 <table>
        <tr>
            <th>Title</th>
@@ -28,6 +24,6 @@
            <td>{{ author.nick }}</td>
        </tr>
    </table>
-    <a href="{% url "posts:post_list" %}">Powrót do listy komentarzy</a>
-</body>
-</html>
+    <a href="/posts/">Powrót do listy komentarzy</a>
+
+{% endblock %}

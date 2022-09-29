@@ -95,7 +95,7 @@
         "content": "raz,dwa,trzy",
         "created": "2022-09-24T10:03:38.135Z",
         "modified": "2022-09-24T10:03:38.135Z",
-        "author": null
+        "author": 2
     }
 },
 {
@@ -106,7 +106,7 @@
         "content": "raz,dwa,trzy",
         "created": "2022-09-24T10:04:13.390Z",
         "modified": "2022-09-24T10:04:13.390Z",
-        "author": null
+        "author": 3
     }
 },
 {
@@ -117,7 +117,7 @@
         "content": "zapisałem to przez plik json",
         "created": "2022-09-25T10:04:13.390Z",
         "modified": "2022-09-25T10:04:13.390Z",
-        "author": null
+        "author": 3
     }
 }
 ]

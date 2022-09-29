@@ -1,4 +1,3 @@
-
 from django.urls import path
 from .views import posts_list, single_post, authors_list, single_author
 
