@@ -1,19 +1,35 @@
-{% extends "G:\Python\Kodilla\workspace\portfolio\infos\templates\main.html" %}
-
+{% extends "main.html" %}
+{% load bootstrap4 %}
 
     {% block title %}{{ title }}{% endblock %}
 
 
 
 {% block content %}
-
+{% bootstrap_messages %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand " href="{% url "greetings" %}">Moje Portfolio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="{% url "about_me" %}">O mnie</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url "posts_list" %}">Posty</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url "authors_list" %}">Autorzy</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url "contact" %}">Kontakt</a></li></li>
+                    </ul>
+                </div>
+                <form class="form-inline" action="" method="GET">
+                    {{search_form.searched_title}}
+                    <input type="submit" value="Szukaj posta">
+                </form>
+            </div>
+        </nav>
 
 <div class="sub-header">
     <div class="searcher">
         <form method = "GET">
-            <h2>Wyszukiwarka postów po tytule:</h2>
-            {{search_form.searched_title}}
-            <input type="submit" value="Szukaj">
+
         </form>
     </div>
 </div>
@@ -22,6 +38,8 @@
                 <table class="table">
                     <thead>
                     <th scope="col">Posty użytkowników</th>
+                    <th scope="col">Data utworzenia</th>
+                    <th scope="col">Autor</th>
                     </thead>
                 <tbody>
                 <ul>
@@ -29,6 +47,8 @@
                    {% for p in posts %}
                     <tr>
                         <td><a href="{{ p.id }}/">{{ p.title }}</a></td>
+                        <td>{{ p.created }}</a></td>
+                        <td>{{ p.author.nick }}</a></td>
                     </tr>
                    {% endfor %}
 
@@ -61,21 +81,44 @@
            </span>
        </div>
      </div>
+            <div class="col-4">
 
-            <div class="col-6">
+                <h3>Nowy post</h3>
                 <div class="new_post_form" >
-                        <h3>Nowy post</h3>
-                        <form method="post">
+                     <form method="post" >
+                <div class = "row"">
                             {% csrf_token %}
-                            {% for field_form in form %}
-                            <p>{{field_form.name|capfirst}}:</p>
-                            <p>{{ field_form.content }}</p>
-                            <p>{{ field_form }}</p>
-                            {% endfor %}
-                            <input type="submit" value="Zapisz">
-                        </form>
+                            <tr>
+                <th><label for="id_title">Title:</label></th>
+                <td>
 
-                </div>
+                  <input  type="text" name="title" value="" maxlength="20" required id="id_title">
+
+
+                </td>
+              </tr>
+
+              <tr>
+                <th><label for="id_content">Content:</label></th>
+                <td>
+                  <textarea name="content" cols="40" rows="10" required id="id_content"></textarea>
+                </td>
+              </tr>
+              <tr>
+                <th><label for="id_author">Author:</label></th>
+                <td>
+                  <select name="author" required id="id_author">
+               {% for author in authors %}
+              <option value="{{ author.id}}">{{author.nick}}</option>
+            {% endfor %}
+                </select>
+                </td>
+              </tr>
+               </div>
+                <input type="submit" value="Zapisz">
+               </form>
+
+
     </div>
 </div>
 

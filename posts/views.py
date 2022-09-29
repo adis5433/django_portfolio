@@ -3,13 +3,19 @@ from posts.models import Post, Author
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 
 from posts.forms import PostForm, AuthorForm, PostSearcherForm
 # Create your views here.
+
+
+
 def posts_list(request):
     if request.method == "POST":
         form = PostForm(data=request.POST)
+        print(form)
         if  form.is_valid():
+            print("zwalidowany")
             form.save()
             messages.add_message(
                 request,
@@ -41,6 +47,7 @@ def posts_list(request):
     searcher = PostSearcherForm()
     form = PostForm()
     posts = Post.objects.all()
+    authors = Author.objects.all()
     paginator = Paginator(posts, 5)
     page_number = request.GET.get('page')
     posts = paginator.get_page(page_number)
@@ -51,16 +58,11 @@ def posts_list(request):
             "paginator": paginator,
             "posts": posts,
             "form": form,
-            "search_form":search_form,
+            "search_form":searcher,
+            "authors": authors
         }
     )
 
-    posts = Post.objects.all()
-    return render(
-        request=request,
-        template_name="posts/post_list.html",
-        context={"posts": posts}
-        )
 
 def single_post(request, id):
    post = Post.objects.get(id=id)
@@ -70,7 +72,7 @@ def single_post(request, id):
        template_name="posts/single_post.html",
        context={"post": post, "author": author}
    )
-
+@login_required
 def authors_list(request):
     if request.method == "POST":
         form = AuthorForm(request.POST)
