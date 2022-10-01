@@ -13,10 +13,20 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="{% url "about_me" %}">O mnie</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url "posts_list" %}">Posty</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url "authors_list" %}">Autorzy</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url "contact" %}">Kontakt</a></li></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'about_me' %}">O mnie</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'posts_list' %}">Posty</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'authors_list' %}">Autorzy</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Kontakt</a></li>
+                          {% if user.is_authenticated %}
+                       <li class="nav-link text-primary">
+                           {{ user.username }} | <a href="{% url 'logout' %}">logout</a>
+                       </li>
+                        {% else %}
+                       <li class="nav-link">
+                           <a href="{% url 'login' %}">login
+                           </a>
+                       </li>
+                        {% endif %}
                     </ul>
                 </div>
                 <form class="form-inline" action="" method="GET">
@@ -40,6 +50,7 @@
                     <th scope="col">Posty użytkowników</th>
                     <th scope="col">Data utworzenia</th>
                     <th scope="col">Autor</th>
+                    <th></th>
                     </thead>
                 <tbody>
                 <ul>
@@ -49,6 +60,11 @@
                         <td><a href="{{ p.id }}/">{{ p.title }}</a></td>
                         <td>{{ p.created }}</a></td>
                         <td>{{ p.author.nick }}</a></td>
+                       <td>
+                        <a href="{% url 'edit-post'/{{p.id}} %}">
+                            <input type="submit" value="Edytuj post">
+                        </a>
+                        </td>
                     </tr>
                    {% endfor %}
 
@@ -85,39 +101,15 @@
 
                 <h3>Nowy post</h3>
                 <div class="new_post_form" >
-                     <form method="post" >
-                <div class = "row"">
-                            {% csrf_token %}
-                            <tr>
-                <th><label for="id_title">Title:</label></th>
-                <td>
-
-                  <input  type="text" name="title" value="" maxlength="20" required id="id_title">
-
-
-                </td>
-              </tr>
-
-              <tr>
-                <th><label for="id_content">Content:</label></th>
-                <td>
-                  <textarea name="content" cols="40" rows="10" required id="id_content"></textarea>
-                </td>
-              </tr>
-              <tr>
-                <th><label for="id_author">Author:</label></th>
-                <td>
-                  <select name="author" required id="id_author">
-               {% for author in authors %}
-              <option value="{{ author.id}}">{{author.nick}}</option>
-            {% endfor %}
-                </select>
-                </td>
-              </tr>
-               </div>
-                <input type="submit" value="Zapisz">
-               </form>
-
+                     {% if perms.posts.add_post %}
+                  <h2>Dodaj nowy</h2>
+                  <form method="POST" enctype='multipart/form-data'>
+                      {% csrf_token %}
+                      {% bootstrap_form form  %}
+                      <input type="submit" value="Dodaj">
+                  </form>
+                {% else %}
+                {% endif %}
 
     </div>
 </div>

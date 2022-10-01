@@ -1,5 +1,7 @@
 {% extends "main.html" %}
+
 {% block content %}
+{% load bootstrap4 %}
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="{% url "greetings" %}">Moje Portfolio</a>
@@ -9,9 +11,16 @@
                         <li class="nav-item"><a class="nav-link" href="{% url "about_me" %}">O mnie</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url "posts_list" %}">Posty</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url "authors_list" %}">Autorzy</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url "contact" %}">Kontakt</a></li></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url "contact" %}">Kontakt</a></li>
+                        {% if user.is_authenticated %}
+                       <li class="nav-link text-primary">
+                           {{ user.username }} | <a href="{% url 'logout' %}">logout</a>
+                       </li>
+                        {% else %}
+                       <li> class="nav-link" href="{% url 'login' %}">login</li>
+                        {% endif %}
                     </ul>
-                </div>
+
 
             </div>
         </nav>

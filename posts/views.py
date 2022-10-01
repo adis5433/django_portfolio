@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
-from posts.forms import PostForm, AuthorForm, PostSearcherForm
+from posts.forms import PostForm, AuthorForm, PostSearcherForm, EditPostForm
 # Create your views here.
 
 
@@ -13,8 +13,11 @@ from posts.forms import PostForm, AuthorForm, PostSearcherForm
 def posts_list(request):
     if request.method == "POST":
         form = PostForm(data=request.POST)
-        print(form)
         if  form.is_valid():
+            print("zwalidowany")
+
+            data = form.cleaned_data.copy()
+            Post.objects.create(data)
             print("zwalidowany")
             form.save()
             messages.add_message(
@@ -76,14 +79,13 @@ def single_post(request, id):
 def authors_list(request):
     if request.method == "POST":
         form = AuthorForm(request.POST)
-        print(form.data)
 
         if form.is_valid():
             form.save()
             messages.add_message(
                 request,
                 messages.SUCCESS,
-                "Dodano nowy Post!!"
+                "Dodano nowego autora"
                 )
 
     authors = Author.objects.all()
@@ -104,4 +106,13 @@ def single_author(request, id):
         request=request,
         template_name="posts/single_author.html",
         context = {"author": author}
+    )
+
+
+def edit_single_post(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    return render(
+        request=request,
+        template_name="posts/edit_post.html",
+        context={"post": post}
     )

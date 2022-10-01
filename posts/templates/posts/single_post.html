@@ -1,7 +1,9 @@
-{% extends "main.html" %}
-    {% block title %}{{ title }}{% endblock %}
-{% block content %}
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
 <table>
        <tr>
            <th>Title</th>
@@ -25,5 +27,7 @@
        </tr>
    </table>
     <a href="/posts/">Powrót do listy komentarzy</a>
-
+    <a href ="{% 'edit-post' post.id %}">
+        <input type="submit" value="Edytuj post">
+    </a>
 {% endblock %}
